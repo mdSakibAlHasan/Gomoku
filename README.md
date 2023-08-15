@@ -1,3 +1,7 @@
+# Gomoku a 10*10 size board game.( Five in a row)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
