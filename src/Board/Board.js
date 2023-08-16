@@ -25,11 +25,7 @@ const Board = () =>{
     play(board,9,9,0);
     play(board,9,5,1);
     play(board,5,5,0);
-    // play(board,5,5,1);
-    // play(board,5,5,0);
-    // play(board,5,5,1);
-
-   
+  
 }
 
 const play = (board, inputRow, inputCol, player) =>{
@@ -47,41 +43,6 @@ const play = (board, inputRow, inputCol, player) =>{
 const print_board = (board) =>{
     for(let i=0;i<rows; i++){
         console.log(board[i][0]+' '+board[i][1]+' '+board[i][2]+' '+board[i][3]+' '+board[i][4]+' '+board[i][5]+' '+board[i][6]+' '+board[i][7]+' '+board[i][8]+' '+board[i][9]);
-    }
-}
-
-const win_check = (board) =>{
-
-}
-
-const row_check = (board, matchValue) =>{
-    for(let i=0;i<rows;i++){
-        for(let j=0;j<5;j++){
-            if(board[i][j]===matchValue || board[i][j+1]===matchValue || board[i][j+2]===matchValue || board[i][j+3]===matchValue  || board[i][j+4]===matchValue){
-                return true;
-            }
-        }
-    }
-}
-
-const col_check = (board, matchValue) =>{
-    for(let i=0;i<cols;i++){
-        for(let j=0;j<5;j++){
-            if(board[j][i]===matchValue || board[j+1][i]===matchValue || board[j+2][i]===matchValue || board[j+3][i]===matchValue  || board[j+4][i]===matchValue){
-                return true;
-            }
-        }
-    }
-}
-
-
-const diagonal_check = (board, matchValue) =>{
-    for(let i=0;i<cols;i++){
-        for(let j=0;j<5;j++){
-            if(board[j][i]===matchValue || board[j+1][i]===matchValue || board[j+2][i]===matchValue || board[j+3][i]===matchValue  || board[j+4][i]===matchValue){
-                return true;
-            }
-        }
     }
 }
 
