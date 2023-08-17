@@ -4,8 +4,8 @@ const OPPONENT = "O";
 const EMPTY = ".";
 
 
-function evaluateLine(line) {                           //lINE POINT CALCULATION
-    const countAICell = line.filter(cell => cell === AI).length;
+function evaluateLine(line, player) {                           //lINE POINT CALCULATION
+    const countAICell = line.filter(cell => cell === player).length;
     const countOpponentCell = line.filter(cell => cell === OPPONENT).length;
     
     if (countAICell === 5) 
@@ -28,34 +28,34 @@ function evaluateLine(line) {                           //lINE POINT CALCULATION
     return 0;
 }
 
-// Evaluate the entire board        @update don't check the row and column if there are empty cell
-function evaluateBoard(board) {
+// Evaluate the entire board        @update don't check the row and column if there emty skip it
+function evaluateBoard(board, player) {
     let totalScore = 0;
     
     for (const row of board) {                      //row check match
         for (let i = 0; i <= SIZE - 5; i++) {
-            totalScore += evaluateLine(row.slice(i, i + 5));
+            totalScore += evaluateLine(row.slice(i, i + 5), player);
         }
     }
     
     for (let col = 0; col < SIZE; col++) {
         for (let i = 0; i <= SIZE - 5; i++) {
             const column = Array.from({ length: 5 }, (_, j) => board[i + j][col]);      //make column for check
-            totalScore += evaluateLine(column);
+            totalScore += evaluateLine(column, player);
         }
     }
     
     for (let i = 0; i <= SIZE - 5; i++) {                   //diagonal for left to right
         for (let j = 0; j <= SIZE - 5; j++) {
             const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + k]);
-            totalScore += evaluateLine(diagonal);
+            totalScore += evaluateLine(diagonal, player);
         }
     }
     
     for (let i = 0; i <= SIZE - 5; i++) {
         for (let j = 0; j <= SIZE - 5; j++) {                   //diagonal for right to left
             const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + 4 - k]);
-            totalScore += evaluateLine(diagonal);
+            totalScore += evaluateLine(diagonal, player);
         }
     }
     
@@ -65,7 +65,7 @@ function evaluateBoard(board) {
 
 function findBestMove(board, depth, maxTurn) {         //find best score for best move
     if (depth === 0) {
-        return [null, evaluateBoard(board)];
+        return [null, evaluateBoard(board, AI)];
     }
     
     if (maxTurn) {
