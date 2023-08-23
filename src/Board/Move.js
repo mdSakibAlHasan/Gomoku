@@ -1,8 +1,15 @@
+const readline = require('readline');
+
 const SIZE = 10;
 const AI = "1";
 const OPPONENT = "O";
 const EMPTY = ".";
 
+//console input
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
 
 function evaluateLine(line, player) {                           //lINE POINT CALCULATION
     const countAICell = line.filter(cell => cell === player).length;
@@ -105,6 +112,17 @@ function findBestMove(board, depth, maxTurn) {         //find best score for bes
     }
 }
 
+const moveOpponent = (board) =>{
+    rl.question('Opponent move (row column): ', (input) => {
+        const [row, col] = input.split(" ").map(coord => parseInt(coord, 10));
+        
+        if (board[row][col] === EMPTY) 
+           board[row][col] = OPPONENT;
+
+    })
+}
+
+
 
 const main = () => {
     const board = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => EMPTY));
@@ -136,6 +154,7 @@ const main = () => {
         const opponentRow = Math.floor(Math.random() * SIZE);
         const opponentCol = Math.floor(Math.random() * SIZE);
         board[opponentRow][opponentCol] = OPPONENT;
+
         
         // Print the board
         for (const row of board) {
@@ -149,6 +168,8 @@ const main = () => {
             break;
         }
     }
+
 }
 
-main();
+
+main()
