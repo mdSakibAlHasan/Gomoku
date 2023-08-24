@@ -2,7 +2,7 @@
 const BOARD_SIZE = 10;
 const AI_PLAYER = "X";
 const OPPONENT_PLAYER = "O";
-const EMPTY = " ";
+const EMPTY = ".";
 
 // Evaluate a line for its potential
 function evaluateLine(line, player) {
@@ -103,7 +103,7 @@ function main() {
     
     while (true) {
         // AI's turn
-        const [aiMove, _] = findBestMove(board, 3, true);
+        const [aiMove, _] = findBestMove(board, 2, true);
         if (aiMove) {
             const [row, col] = aiMove;
             board[row][col] = AI_PLAYER;
