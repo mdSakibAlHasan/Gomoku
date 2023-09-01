@@ -41,22 +41,28 @@ function evaluateBoard(board, player) {
     
     for (let col = 0; col < SIZE; col++) {
         for (let i = 0; i <= SIZE - 5; i++) {
-            const column = Array.from({ length: 5 }, (_, j) => board[i + j][col]);      //make column for check
-            totalScore += evaluateLine(column, player);
+            if(board[i][col] != EMPTY){
+                const column = Array.from({ length: 5 }, (_, j) => board[i + j][col]);      //make column for check
+                totalScore += evaluateLine(column, player);
+            }
         }
     }
     
     for (let i = 0; i <= SIZE - 5; i++) {                   //diagonal for left to right
         for (let j = 0; j <= SIZE - 5; j++) {
-            const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + k]);
-            totalScore += evaluateLine(diagonal, player);
+            if(board[i][j] != EMPTY){
+                const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + k]);
+                totalScore += evaluateLine(diagonal, player);
+            }
         }
     }
     
     for (let i = 0; i <= SIZE - 5; i++) {
         for (let j = 0; j <= SIZE - 5; j++) {                   //diagonal for right to left
-            const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + 4 - k]);
-            totalScore += evaluateLine(diagonal, player);
+            if(board[i][j] != EMPTY){
+                const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + 4 - k]);
+                totalScore += evaluateLine(diagonal, player);
+            }
         }
     }
     
