@@ -5,10 +5,12 @@ const OPPONENT = "O";
 const EMPTY = ".";
 
 
-function evaluateLine(line, player) {                           //lINE POINT CALCULATION
+function evaluateLine(line, player) {                           
     const countAICell = line.filter(cell => cell === player).length;
     const countOpponentCell = line.filter(cell => cell === OPPONENT).length;
     
+    // if (countAICell === 6) 
+    //     return 2000;
     if (countAICell === 5) 
         return 1000;
     if (countOpponentCell === 5) 
@@ -33,7 +35,7 @@ function evaluateLine(line, player) {                           //lINE POINT CAL
 function evaluateBoard(board, player) {
     let totalScore = 0;
     
-    for (const row of board) {                      //row check match
+    for (const row of board) {                      
         for (let i = 0; i <= SIZE - 5; i++) {
             totalScore += evaluateLine(row.slice(i, i + 5), player);
         }
@@ -42,13 +44,13 @@ function evaluateBoard(board, player) {
     for (let col = 0; col < SIZE; col++) {
         for (let i = 0; i <= SIZE - 5; i++) {
             if(board[i][col] != EMPTY){
-                const column = Array.from({ length: 5 }, (_, j) => board[i + j][col]);      //make column for check
+                const column = Array.from({ length: 5 }, (_, j) => board[i + j][col]);     
                 totalScore += evaluateLine(column, player);
             }
         }
     }
     
-    for (let i = 0; i <= SIZE - 5; i++) {                   //diagonal for left to right
+    for (let i = 0; i <= SIZE - 5; i++) {                   
         for (let j = 0; j <= SIZE - 5; j++) {
             if(board[i][j] != EMPTY){
                 const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + k]);
@@ -58,7 +60,7 @@ function evaluateBoard(board, player) {
     }
     
     for (let i = 0; i <= SIZE - 5; i++) {
-        for (let j = 0; j <= SIZE - 5; j++) {                   //diagonal for right to left
+        for (let j = 0; j <= SIZE - 5; j++) {                   
             if(board[i][j] != EMPTY){
                 const diagonal = Array.from({ length: 5 }, (_, k) => board[i + k][j + 4 - k]);
                 totalScore += evaluateLine(diagonal, player);
@@ -88,7 +90,7 @@ function findAdjacentCell(board, i, j){
 }
 
 
-function findBestMove(board, depth, maxTurn, alpha, bita) {         //find best score for best move
+function findBestMove(board, depth, maxTurn, alpha, bita) {        
     if (depth === 0) {
         return [null, evaluateBoard(board, AI)];
     }
@@ -145,8 +147,8 @@ const main = () => {
 
     while (true) {
         board[4][4] = OPPONENT; //replace it with proper implementation @update
-        // AI's turn
-        const [aiMove, _] = findBestMove(board, 4, true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
+        
+        const [aiMove, _] = findBestMove(board, 3, true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
         if (aiMove) {
             const [row, col] = aiMove;
             board[row][col] = AI;
@@ -162,14 +164,14 @@ const main = () => {
         }
         console.log();
         
-        // Check if AI wins
+       
         if (evaluateBoard(board, AI) >= 1000) {
             console.log("AI wins the game");
             break;
         }
 
         
-        // Opponent's turn (simulate user input)
+        
         while(1){       
             const opponentRow = Math.floor(Math.random() * SIZE);
             const opponentCol = Math.floor(Math.random() * SIZE);
@@ -187,7 +189,7 @@ const main = () => {
         }
         console.log();
         
-        // Check if opponent wins
+       
         if (evaluateBoard(board, OPPONENT) <= -1000) {
             console.log("Opponent wins!");
             break;
