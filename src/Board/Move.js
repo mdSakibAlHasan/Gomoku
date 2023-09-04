@@ -1,9 +1,7 @@
-import { getSuggestedQuery } from "@testing-library/react";
-
 const SIZE = 10;
 const AI = "1";
 const OPPONENT = "O";
-const EMPTY = ".";
+const EMPTY = "";
 
 
 function evaluateLine(line, player) {                           
@@ -150,26 +148,28 @@ const converter1D = (board) =>{
 
 
 const converter2D = (board) =>{
-    for(let i=0;i<10;i++){
-        console.log(board[i]," -- ");
-    }
 
-    console.log(board)
+    console.log(board," confirm it pass to backend")
     const cells2D = Array.from({ length: SIZE }, (_, rowIndex) =>
         Array.from({ length: SIZE }, (_, colIndex) =>
             board[rowIndex * SIZE + colIndex]
         )
         );
-        console.log(cells2D,"=============")
-        const abc = converter1D(cells2D);
-        console.log(abc," /////////// ")
-    return abc;
+        console.log(cells2D," confirm it converted")
+        // cells2D[4][5] = '1';
+        // const abc = converter1D(cells2D);
+        // console.log(abc," /////////// converted it again 1D ")
+    return cells2D;
 }
 
 
 
 export const  AI_movement = (board) =>{
     board = converter2D(board);
+
+    if (evaluateBoard(board, OPPONENT) <= -1000) {
+        console.log("Opponent wins!");
+    }
         
     const [aiMove, _] = findBestMove(board, 3, true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
     if (aiMove) {
@@ -186,6 +186,11 @@ export const  AI_movement = (board) =>{
         console.log(row.join(" "));
     }
     console.log();
+    if (evaluateBoard(board, AI) >= 1000) {
+        console.log("AI wins the game");
+    }
+
+   
     board = converter1D(board);
     //return "AI can't move", board;
 
@@ -194,61 +199,62 @@ export const  AI_movement = (board) =>{
 
 
 
-// export const main = () => {
-//     const board = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => EMPTY));
+ const main = () => {
+    const board = Array.from({ length: SIZE }, () => Array.from({ length: SIZE }, () => EMPTY));
+    console.log(board, " first time");
 
-//     while (true) {
-//         board[4][4] = OPPONENT; //replace it with proper implementation @update
+    while (true) {
+        board[4][4] = OPPONENT; //replace it with proper implementation @update
         
-//         const [aiMove, _] = findBestMove(board, 3, true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
-//         if (aiMove) {
-//             const [row, col] = aiMove;
-//             board[row][col] = AI;
-//             console.log(`AI's move: ${row} ${col}`);
-//         } else {
-//             console.log("AI cannot move.");
-//             break;
-//         }
+        const [aiMove, _] = findBestMove(board, 3, true, Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY);
+        if (aiMove) {
+            const [row, col] = aiMove;
+            board[row][col] = AI;
+            console.log(`AI's move: ${row} ${col}`);
+        } else {
+            console.log("AI cannot move.");
+            break;
+        }
         
-//         // Print the board
-//         for (const row of board) {
-//             console.log(row.join(" "));
-//         }
-//         console.log();
+        // Print the board
+        for (const row of board) {
+            console.log(row.join(" "));
+        }
+        console.log();
         
        
-//         if (evaluateBoard(board, AI) >= 1000) {
-//             console.log("AI wins the game");
-//             break;
-//         }
+        if (evaluateBoard(board, AI) >= 1000) {
+            console.log("AI wins the game");
+            break;
+        }
 
         
         
-//         while(1){       
-//             const opponentRow = Math.floor(Math.random() * SIZE);
-//             const opponentCol = Math.floor(Math.random() * SIZE);
-//             if(board[opponentRow][opponentCol] === EMPTY){
-//                 board[opponentRow][opponentCol] = OPPONENT;
-//                 break;
-//             }
+        while(1){       
+            const opponentRow = Math.floor(Math.random() * SIZE);
+            const opponentCol = Math.floor(Math.random() * SIZE);
+            if(board[opponentRow][opponentCol] === EMPTY){
+                board[opponentRow][opponentCol] = OPPONENT;
+                break;
+            }
             
-//         }
+        }
 
         
-//         // Print the board
-//         for (const row of board) {
-//             console.log(row.join(" "));
-//         }
-//         console.log();
+        // Print the board
+        for (const row of board) {
+            console.log(row.join(" "));
+        }
+        console.log();
         
        
-//         if (evaluateBoard(board, OPPONENT) <= -1000) {
-//             console.log("Opponent wins!");
-//             break;
-//         }
-//     }
+        if (evaluateBoard(board, OPPONENT) <= -1000) {
+            console.log("Opponent wins!");
+            break;
+        }
+    }
 
-// }
+}
 
 
-// main()
+//main()

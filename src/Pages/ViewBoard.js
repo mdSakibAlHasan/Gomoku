@@ -8,7 +8,7 @@ const Board = () => {
 	const row_count = 10;
 	const col_count = 10;
 	
-	const [turn, setTurn] = useState('b');
+	const [turn, setTurn] = useState('0');
 	const [cells, setCells] = useState(Array(row_count*col_count).fill(''));
 	const [winner, setWinner] = useState('');
 
@@ -21,21 +21,23 @@ const Board = () => {
 
 		let squares = [...cells];
 
-		if (turn === 'b') {
-			squares[num] = 'b';
+		//if (turn === '0') {
+			squares[num] = '0';
 			setCells(squares)
 			
-			setTurn('r');
-		} else {
-			squares[num] = 'r';
-			setTurn('b');
-		}
-		console.log(squares," ------------ ")
+			setTurn('1');
+		// } else {
+		// 	squares[num] = '1';
+		// 	setTurn('0');
+		// }
+		console.log(squares," ------------ forntent")
 		
 		setCells(squares);
 		const cell = AI_movement(squares);
-		console.log(cell,"++++++++++++++++++")
+		console.log(cell,"++++++++++++++++++ in the forntent after ai movement")
 		setCells(cell);
+
+		setTurn('1');
 
 		
 	};
@@ -43,7 +45,7 @@ const Board = () => {
 	const handleRestart = () => {
 		setWinner('');
 		setCells(Array(row_count*col_count).fill(''));
-		setTurn('b');
+		setTurn('0');
 	};
 
 	const Cell = ({ num }) => {
@@ -52,21 +54,22 @@ const Board = () => {
 
 	useEffect(() => {
 		setTimeout(() => {
-			if(turn === 'r'){
+			if(turn === '1'){
 				let squares = [...cells]
 				
 			}
 		}, 0)
 	})
 
+
     var t = 0;
 
 	return (
 		<div className='container mt-5'>
-			{turn==='r' && (
+			{turn==='1' && (
 				<b><p><span class="red">Red</span>'s Turn!</p></b>
 			)}
-			{turn==='b' && (
+			{turn==='0' && (
 				<b><p>Your Turn!</p></b>
 			)}
 			<table className="box">
