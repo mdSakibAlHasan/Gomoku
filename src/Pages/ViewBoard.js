@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './board.css';
+// import { main } from '../Board/Move.js';
+import { AI_movement } from '../Board/Move.js';
 
 
 const Board = () => {
@@ -11,6 +13,7 @@ const Board = () => {
 	const [winner, setWinner] = useState('');
 
 	const handleClick = (num) => {
+		console.log(cells)
 		if (cells[num] !== '') {
 			alert('already clicked');
 			return;
@@ -27,8 +30,13 @@ const Board = () => {
 			squares[num] = 'r';
 			setTurn('b');
 		}
+		console.log(squares," ------------ ")
 		
 		setCells(squares);
+		const cell = AI_movement(squares);
+		console.log(cell,"++++++++++++++++++")
+		setCells(cell);
+
 		
 	};
 
