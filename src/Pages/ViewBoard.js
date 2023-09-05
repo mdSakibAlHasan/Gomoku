@@ -19,15 +19,15 @@ const Board = () => {
 
     let squares = [...cells];
 
-    if (turn === "0") {
+    // if (turn === "0") {
       squares[num] = "0";
       setCells(squares);
 
       setTurn("1");
-    } else {
-      squares[num] = "1";
-      setTurn("0");
-    }
+    // } else {
+    //   squares[num] = "1";
+    //   setTurn("0");
+    // }
     console.log(squares, " ------------ forntent");
 
     setCells(squares);
