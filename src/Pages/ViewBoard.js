@@ -19,15 +19,10 @@ const Board = () => {
 
     let squares = [...cells];
 
-    // if (turn === "0") {
-      squares[num] = "0";
-      setCells(squares);
-
-      setTurn("1");
-    // } else {
-    //   squares[num] = "1";
-    //   setTurn("0");
-    // }
+    squares[num] = "0";
+    setCells(squares);
+    setTurn("1");
+   
     console.log(squares, " ------------ forntent");
 
     setCells(squares);
@@ -47,6 +42,12 @@ const Board = () => {
     );
   };
 
+  const handleRestart = () =>{
+    setWinner('');
+		setCells(Array(row_count*col_count).fill(''));
+		setTurn('0');
+  }
+
   useEffect(() => {
     setTimeout(() => {
       if (turn === "1") {
@@ -58,6 +59,7 @@ const Board = () => {
   var t = 0;
 
   return (
+    <div className="container m-8">
     <div className="container mt-5">
       {turn === "1" && (
         <b>
@@ -195,6 +197,10 @@ const Board = () => {
           </tr>
         </tbody>
       </table>
+    </div>
+      <div className="container m-3">
+        <button class="btndd mt-4" onClick={() => handleRestart()}>Restart Game</button>
+      </div>
     </div>
   );
 };
