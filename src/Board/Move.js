@@ -1,4 +1,5 @@
-import {boardEval as evaluateBoard} from "./boardEvaluation.js"
+import {boardEval as evaluateBoard} from "./boardEvaluation.js";
+// import {findBestMove} from "./Minimax.js";
 
 const SIZE = 10;
 const AI = "1";
@@ -6,23 +7,23 @@ const OPPONENT = "O";
 const EMPTY = "";
 
 
-function evaluateLine(line, player) {
-  const countAICell = line.filter((cell) => cell === player).length;
-  const countOpponentCell = line.filter((cell) => cell === OPPONENT).length;
+// function evaluateLine(line, player) {
+//   const countAICell = line.filter((cell) => cell === player).length;
+//   const countOpponentCell = line.filter((cell) => cell === OPPONENT).length;
 
-  // if (countAICell === 6)
-  //     return 2000;
-  if (countAICell === 5) return 1000;
-  if (countOpponentCell === 5) return -1000;
-  if (countAICell === 4 && line.includes(EMPTY)) return 100;
-  if (countOpponentCell === 4 && line.includes(EMPTY)) return -100;
-  if (countAICell === 3 && line.includes(EMPTY)) return 10;
-  if (countOpponentCell === 3 && line.includes(EMPTY)) return -10;
-  if (countAICell === 2 && line.includes(EMPTY)) return 1;
-  if (countOpponentCell === 2 && line.includes(EMPTY)) return -1;
+//   // if (countAICell === 6)
+//   //     return 2000;
+//   if (countAICell === 5) return 1000;
+//   if (countOpponentCell === 5) return -1000;
+//   if (countAICell === 4 && line.includes(EMPTY)) return 100;
+//   if (countOpponentCell === 4 && line.includes(EMPTY)) return -100;
+//   if (countAICell === 3 && line.includes(EMPTY)) return 10;
+//   if (countOpponentCell === 3 && line.includes(EMPTY)) return -10;
+//   if (countAICell === 2 && line.includes(EMPTY)) return 1;
+//   if (countOpponentCell === 2 && line.includes(EMPTY)) return -1;
 
-  return 0;
-}
+//   return 0;
+// }
 
 
 
@@ -229,11 +230,12 @@ const main = () => {
   console.log(board, " first time");
 
   while (true) {
-    board[4][4] = OPPONENT; //replace it with proper implementation @update
+    board[4][4] = OPPONENT; //replace it with proper implementation 
 
+    board=board.flat();
     const [aiMove, _] = findBestMove(
       board,
-      5,
+      3,
       true,
       Number.NEGATIVE_INFINITY,
       Number.POSITIVE_INFINITY
