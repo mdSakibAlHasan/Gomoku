@@ -1,4 +1,3 @@
-import {lineRead} from "./BoardLines.js"
 import {boardEval as evaluateBoard} from "./boardEvaluation.js"
 
 const SIZE = 10;
@@ -111,16 +110,20 @@ function findBestMove(board, depth, maxTurn, alpha, bita) {
     let bestMove = null;
     let bestScore = Number.NEGATIVE_INFINITY;
     for (let i = 0; i < SIZE; i++) {
-      // @update change huristic. make tree only sorounded by the actual coin locate
+      // update change huristic. make tree only sorounded by the actual coin locate
       for (let j = 0; j < SIZE; j++) {
         if (board[i][j] === EMPTY && findAdjacentCell(board, i, j)) {
           board[i][j] = AI;
-          const [_, score] = findBestMove(board, depth - 1, false);
+          const [_, score] = findBestMove(board, depth - 1, false, alpha,bita);
           board[i][j] = EMPTY;
+          console.log(`i and j: ${i},${j} score: ${score} ,bestScore: ${bestScore}`);
           if (score > bestScore) {
             //@update add alpha beta pruning
             bestScore = score;
             bestMove = [i, j];
+
+            
+
           }
           alpha = Math.max(alpha, bestScore);
           if (bita <= alpha) {
@@ -129,7 +132,11 @@ function findBestMove(board, depth, maxTurn, alpha, bita) {
         }
       }
     }
+    
+
+    console.log(`bestMove: ${bestMove}`);
     return [bestMove, bestScore];
+
   } else {
     let bestMove = null;
     let bestScore = Number.POSITIVE_INFINITY;
@@ -137,7 +144,7 @@ function findBestMove(board, depth, maxTurn, alpha, bita) {
       for (let j = 0; j < SIZE; j++) {
         if (board[i][j] === EMPTY && findAdjacentCell(board, i, j)) {
           board[i][j] = OPPONENT;
-          const [_, score] = findBestMove(board, depth - 1, true);
+          const [_, score] = findBestMove(board, depth - 1, true, alpha, bita);
           board[i][j] = EMPTY;
           if (score < bestScore) {
             bestScore = score;
@@ -150,6 +157,7 @@ function findBestMove(board, depth, maxTurn, alpha, bita) {
         }
       }
     }
+
     return [bestMove, bestScore];
   }
 }
@@ -225,7 +233,7 @@ const main = () => {
 
     const [aiMove, _] = findBestMove(
       board,
-      3,
+      5,
       true,
       Number.NEGATIVE_INFINITY,
       Number.POSITIVE_INFINITY
