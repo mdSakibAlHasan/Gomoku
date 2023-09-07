@@ -58,5 +58,29 @@ export function lineRead(squares) {
 
 
 
+export function findLines(board,pattern){
+
+    board=board.flat();
+    
+    let count = 0;
+    let boardstate = lineRead(board)
+
+    for(let i = 0 ; i < 19 ; i++){
+        if(i<10){
+            if(boardstate.rows[i].includes(pattern)) count++;
+            else if(boardstate.rows[i].includes(pattern.split("").reverse().join(""))) count++;
+            if(boardstate.cols[i].includes(pattern)) count++;
+            else if(boardstate.cols[i].includes(pattern.split("").reverse().join(""))) count++;
+        }
+        if(boardstate.ldgs[i].includes(pattern)) count++;
+        else if(boardstate.ldgs[i].includes(pattern.split("").reverse().join(""))) count++;
+        if(boardstate.rdgs[i].includes(pattern)) count++;
+        else if(boardstate.rdgs[i].includes(pattern.split("").reverse().join(""))) count++;
+    }
+
+    return count;
+}
+
+
 
 
