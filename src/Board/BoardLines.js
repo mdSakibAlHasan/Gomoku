@@ -13,12 +13,12 @@ export function lineRead(squares) {
   // console.log("this is" +board);
 
   for(let i = 0 ; i < 100 ; i++) if(board[i]==='') board[i] = '-'
-    for (let i = 0; i < row_count; i++) {
+    for (let i = 0; i < row; i++) {
         rowLines[i] = ""
         colLines[i] = ""
-        for (let j = 0; j < col_count; j++) {
-            rowLines[i] += board[i*col_count+j]
-            colLines[i] += board[i+col_count*j]
+        for (let j = 0; j < col; j++) {
+            rowLines[i] += board[i*col+j]
+            colLines[i] += board[i+col*j]
         }
     }
 
@@ -61,16 +61,16 @@ export function lineRead(squares) {
 export function findLines(board,pattern){
 
     board=board.flat();
-    
+
     let count = 0;
     let boardstate = lineRead(board)
 
     for(let i = 0 ; i < 19 ; i++){
         if(i<10){
-            if(boardstate.rows[i].includes(pattern)) count++;
-            else if(boardstate.rows[i].includes(pattern.split("").reverse().join(""))) count++;
-            if(boardstate.cols[i].includes(pattern)) count++;
-            else if(boardstate.cols[i].includes(pattern.split("").reverse().join(""))) count++;
+            if(boardstate.rowLines[i].includes(pattern)) count++;
+            else if(boardstate.rowLines[i].includes(pattern.split("").reverse().join(""))) count++;
+            if(boardstate.colLines[i].includes(pattern)) count++;
+            else if(boardstate.colLines[i].includes(pattern.split("").reverse().join(""))) count++;
         }
         if(boardstate.ldgs[i].includes(pattern)) count++;
         else if(boardstate.ldgs[i].includes(pattern.split("").reverse().join(""))) count++;
