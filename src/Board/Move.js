@@ -1,3 +1,5 @@
+import {lineRead} from "./BoardLines.js"
+
 const SIZE = 10;
 const AI = "1";
 const OPPONENT = "O";
@@ -24,6 +26,7 @@ function evaluateLine(line, player) {
 
 // Evaluate the entire board        @update don't check the row and column if there emty skip it
 function evaluateBoard(board, player) {
+
   let totalScore = 0;
 
   for (const row of board) {
