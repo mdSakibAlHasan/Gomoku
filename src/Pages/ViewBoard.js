@@ -78,20 +78,55 @@ const Board = () => {
   var t = 0;
 
   return (
-    <div className="container m-8">
-      <div className="container mt-5">
-        {turn === "1" && winner==="" && (
-          <b>
+    <div className=" m-8 boardBG" style={{ height: "100vh" }}>
+      {turn === "1" && winner === "" && (
+        <b>
+          <p>
+            <h1 style={{marginTop:"10px" ,color:"#9cbed4"}}>
+              <span class="red">Red</span>'s Turn!
+            </h1>
+          </p>
+        </b>
+      )}
+      {turn === "0" && winner === "" && (
+        <b>
+          <h1 style={{marginTop:"10px" ,color:"#9cbed4"}} >
+            <p>Your Turn!</p>
+          </h1>
+        </b>
+      )}
+
+      {winner === "1" && (
+        <>
+          <b className="mt-4 mb-3">
             <p>
-              <h1><span class="red">Red</span>'s Turn!</h1>
+              <h2 style={{marginTop:"10px" ,color:"#9cbed4"}}>
+                <span class="red">Red</span> is the winner!
+              </h2>
             </p>
           </b>
-        )} 
-        {turn === "0" && winner===""&& (
-          <b>
-            <h1><p>Your Turn!</p></h1>
+          <button class="btndd" onClick={() => handleRestart()}>
+            Play Again
+          </button>
+        </>
+      )}
+
+      {winner === "0" && (
+        <>
+          <b className="mt-4 mb-3">
+            <p>
+              <h2 style={{marginTop:"10px" ,color:"#9cbed4"}} >
+                Black is the winner!
+              </h2>
+            </p>
           </b>
-        )}
+          <button class="btndd" onClick={() => handleRestart()}>
+            Play Again
+          </button>
+        </>
+      )}
+
+      <div className="container mt-5">
         <table className="box">
           <tbody>
             <tr>
@@ -216,32 +251,6 @@ const Board = () => {
             </tr>
           </tbody>
         </table>
-
-        {winner === "1" && (
-          <>
-            <b className="mt-4 mb-3">
-              <p>
-                <h2><span class="red">Red</span> is the winner!</h2>
-              </p>
-            </b>
-            <button class="btndd" onClick={() => handleRestart()}>
-              Play Again
-            </button>
-          </>
-        )}
-
-        {winner === "0" && (
-          <>
-            <b className="mt-4 mb-3">
-              <p>
-               <h2><span class="black">Black</span> is the winner!</h2> 
-              </p>
-            </b>
-            <button class="btndd" onClick={() => handleRestart()}>
-              Play Again
-            </button>
-          </>
-        )}
 
         {winner === "" && (
           <>
