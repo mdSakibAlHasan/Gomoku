@@ -2,7 +2,7 @@ import {boardEval as evaluate} from "./boardEvaluation";
 
 
 export function adjacentCell(board){
-    board=board.flat();
+    // board=board.flat();
     let indices = new Set()
 
     for(let i = 0 ; i < 100 ; i++){
@@ -25,7 +25,7 @@ export function adjacentCell(board){
 
 export function minimax(board, maxPlayer, depth, alpha, beta){
 
-    board=board.flat();
+    // board=board.flat();
 
     let boardvalue = evaluate(board,maxPlayer)
     if(depth===0 || boardvalue===1000000 || boardvalue===-1000000) {
@@ -53,7 +53,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
                 if(alpha>=beta) {break;}
             }
             else {
-                board[indices[i]] = 'b';
+                board[indices[i]] = '0';
                 let minimax_score =  minimax(board,true,depth-1,alpha,beta)
                 score = Math.min(score, minimax_score);
                 beta = Math.min(minimax_score,beta)
@@ -69,6 +69,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
 
 export const findBestMove = (squares) => {
     let board = [...squares]
+    // board=board.flat();
     let bestMove = -1;
     let score = -Infinity;
     let indices = adjacentCell(squares)
@@ -89,6 +90,6 @@ export const findBestMove = (squares) => {
     
     console.log("best: ", bestMove, "score: ",score);
     //squares[bestMove] = 'r'; // Computer max player
-    return [bestMove];
+    return bestMove;
 }
 

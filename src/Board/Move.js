@@ -1,5 +1,5 @@
 import {boardEval as evaluateBoard} from "./boardEvaluation.js";
-// import {findBestMove} from "./Minimax.js";
+import {findBestMove as findBestMove2} from "./Minimax.js";
 
 const SIZE = 10;
 const AI = "1";
@@ -188,16 +188,12 @@ const converter2D = (board) => {
 export const AI_movement = (board) => {
   board = converter2D(board);
 
-  if (evaluateBoard(board, OPPONENT) <= -1000) {
+  if (evaluateBoard(board, OPPONENT) <= -1000000) {
     console.log("Opponent wins!");
   }
 
-  const [aiMove, _] = findBestMove(
-    board,
-    3,
-    true,
-    Number.NEGATIVE_INFINITY,
-    Number.POSITIVE_INFINITY
+  const [aiMove,_] = findBestMove(
+    board,3,true,-Infinity,+Infinity
   );
   if (aiMove) {
     const [row, col] = aiMove;
@@ -213,15 +209,19 @@ export const AI_movement = (board) => {
     console.log(row.join(" "));
   }
   console.log();
-  if (evaluateBoard(board, AI) >= 1000) {
+  if (evaluateBoard(board, AI) >= 1000000) {
     console.log("AI wins the game");
   }
 
-  board = converter1D(board);
+  board = board.flat();
   //return "AI can't move", board;
 
   return board;
 };
+
+
+
+
 
 const main = () => {
   const board = Array.from({ length: SIZE }, () =>
