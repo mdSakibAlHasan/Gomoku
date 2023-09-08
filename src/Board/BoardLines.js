@@ -8,7 +8,7 @@ export function lineRead(squares) {
   let ldgs = new Array(19);
   let board = [...squares];
 
-  board=board.flat();
+//   board=board.flat();
 
   // console.log("this is" +board);
 
@@ -60,7 +60,7 @@ export function lineRead(squares) {
 
 export function findLines(board,pattern){
 
-    board=board.flat();
+    // board=board.flat();
 
     let count = 0;
     let boardstate = lineRead(board)
@@ -79,6 +79,16 @@ export function findLines(board,pattern){
     }
 
     return count;
+}
+
+
+export function checkWinner(board){
+	let red = "11111";
+    let black = "00000";
+    // pass
+    if(findLines(board,red) > 0) return '1'
+    else if(findLines(board,black) > 0) return '0'
+    else return ''
 }
 
 

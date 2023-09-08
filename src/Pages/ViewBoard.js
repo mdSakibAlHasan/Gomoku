@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./board.css";
 import { findBestMove } from "../Board/Minimax";
+import { checkWinner } from "../Board/BoardLines";
+
 // import { main } from '../Board/Move.js';
-import { AI_movement } from "../Board/Move.js";
+// import { AI_movement } from "../Board/Move.js";
 
 const Board = () => {
   const row_count = 10;
@@ -23,13 +25,15 @@ const Board = () => {
       squares[num] = "0";
       setCells(squares);
       setTurn("1");
-    }else{
+    } else {
       squares[num] = "1";
       setTurn("0");
     }
     console.log(squares, " ------------ forntent");
 
     setCells(squares);
+    setWinner(checkWinner(squares));
+
     // const cell = AI_movement(squares);
     // console.log(cell, "++++++++++++++++++ in the forntent after ai movement");
     // setCells(cell);
@@ -58,6 +62,11 @@ const Board = () => {
         let squares = [...cells];
         let best = findBestMove(squares);
         handleClick(best);
+        // if(score>=1000000){
+        //   alert("AI win");
+        // }else if(score<=-1000000){
+        //   alert("You win");
+        // }
       }
     }, 0);
   });
@@ -203,11 +212,37 @@ const Board = () => {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="container m-3">
-        <button class="btndd mt-4" onClick={() => handleRestart()}>
-          Restart Game
-        </button>
+
+        {winner === "1" && (
+          <>
+            <b className="mt-4 mb-3">
+              <p>
+                <span class="red">Red</span> is the winner!
+              </p>
+            </b>
+            <button class="btndd" onClick={() => handleRestart()}>
+              Play Again
+            </button>
+          </>
+        )}
+        {winner === "0" && (
+          <>
+            <b className="mt-4 mb-3">
+              <p>
+                <span class="black">Black</span> is the winner!
+              </p>
+            </b>
+            <button class="btndd" onClick={() => handleRestart()}>
+              Play Again
+            </button>
+          </>
+        )}
+
+        <div className="container m-3">
+          <button class="btndd mt-4" onClick={() => handleRestart()}>
+            Restart Game
+          </button>
+        </div>
       </div>
     </div>
   );

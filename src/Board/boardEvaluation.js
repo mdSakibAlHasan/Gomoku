@@ -76,8 +76,8 @@ export function boardEval(board,maxPlayer){
     // let fiveinrow = 0, livefour = 0, livethree = 0, deadfour = 0, deadthree = 0, deadtwo = 0;
 
     for(let i = 0 ; i < redfavor.fiveinrow.length ; i++){
-        if(findLines(board,redfavor.fiveinrow[i]) > 0) return 1000000;
-        if(findLines(board,blackfavor.fiveinrow[i]) > 0) return -1000000;
+        if(findLines(board,redfavor.fiveinrow[i]) > 0) return 10000000;
+        if(findLines(board,blackfavor.fiveinrow[i]) > 0) return -10000000;
     }
     for(let i = 0 ; i < redfavor.livefour.length ; i++){
         if(findLines(board,redfavor.livefour[i])) return 100000;

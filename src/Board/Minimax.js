@@ -1,6 +1,5 @@
 import {boardEval as evaluate} from "./boardEvaluation";
 
-
 export function adjacentCell(board){
     // board=board.flat();
     let indices = new Set()
@@ -28,7 +27,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
     // board=board.flat();
 
     let boardvalue = evaluate(board,maxPlayer)
-    if(depth===0 || boardvalue===1000000 || boardvalue===-1000000) {
+    if(depth===4 || boardvalue===10000000 || boardvalue===-10000000) {
         //console.log(boardvalue);
         return boardvalue;
     }
@@ -46,7 +45,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
             board[indices[i]] = '1'
             if(maxPlayer) {
                 board[indices[i]] = '1';
-                let minimax_score = minimax(board,false,depth-1,alpha,beta)
+                let minimax_score = minimax(board,false,depth+1,alpha,beta)
                 score = Math.max(score, minimax_score);
                 alpha = Math.max(score,alpha)
                 board[indices[i]] = ''
@@ -54,7 +53,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
             }
             else {
                 board[indices[i]] = '0';
-                let minimax_score =  minimax(board,true,depth-1,alpha,beta)
+                let minimax_score =  minimax(board,true,depth+1,alpha,beta)
                 score = Math.min(score, minimax_score);
                 beta = Math.min(minimax_score,beta)
                 board[indices[i]] = ''
@@ -63,7 +62,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
         }
     }
 
-    return [score];
+    return score;
 }
 
 
@@ -79,7 +78,7 @@ export const findBestMove = (squares) => {
         //console.log(indices[i]);
         if(board[indices[i]]===''){
             board[indices[i]] = '1'
-            let minimax_score = minimax(board,false,3,-Infinity,Infinity);
+            let minimax_score = minimax(board,false,1,-Infinity,Infinity);
             if(minimax_score > score){
                 bestMove = indices[i];
                 score = minimax_score;
@@ -92,4 +91,7 @@ export const findBestMove = (squares) => {
     //squares[bestMove] = 'r'; // Computer max player
     return bestMove;
 }
+
+
+
 
