@@ -27,7 +27,7 @@ export function minimax(board, maxPlayer, depth, alpha, beta){
     // board=board.flat();
 
     let boardvalue = evaluate(board,maxPlayer)
-    if(depth===4 || boardvalue===10000000 || boardvalue===-10000000) {
+    if(depth===3 || boardvalue===10000000 || boardvalue===-10000000) {
         //console.log(boardvalue);
         return boardvalue;
     }

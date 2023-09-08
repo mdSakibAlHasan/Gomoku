@@ -19,6 +19,10 @@ const Board = () => {
       alert("already clicked");
       return;
     }
+    if (winner === "1" || winner == "0") {
+      alert("match is finished");
+      return;
+    }
 
     let squares = [...cells];
     if (turn === "0") {
@@ -225,6 +229,7 @@ const Board = () => {
             </button>
           </>
         )}
+
         {winner === "0" && (
           <>
             <b className="mt-4 mb-3">
@@ -238,11 +243,15 @@ const Board = () => {
           </>
         )}
 
-        <div className="container m-3">
-          <button class="btndd mt-4" onClick={() => handleRestart()}>
-            Restart Game
-          </button>
-        </div>
+        {winner === "" && (
+          <>
+            <div className="container m-3">
+              <button class="btndd mt-4" onClick={() => handleRestart()}>
+                Restart Game
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
