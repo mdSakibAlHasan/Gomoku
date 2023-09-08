@@ -80,16 +80,16 @@ const Board = () => {
   return (
     <div className="container m-8">
       <div className="container mt-5">
-        {turn === "1" && (
+        {turn === "1" && winner==="" && (
           <b>
             <p>
-              <span class="red">Red</span>'s Turn!
+              <h1><span class="red">Red</span>'s Turn!</h1>
             </p>
           </b>
-        )}
-        {turn === "0" && (
+        )} 
+        {turn === "0" && winner===""&& (
           <b>
-            <p>Your Turn!</p>
+            <h1><p>Your Turn!</p></h1>
           </b>
         )}
         <table className="box">
@@ -221,7 +221,7 @@ const Board = () => {
           <>
             <b className="mt-4 mb-3">
               <p>
-                <span class="red">Red</span> is the winner!
+                <h2><span class="red">Red</span> is the winner!</h2>
               </p>
             </b>
             <button class="btndd" onClick={() => handleRestart()}>
@@ -234,7 +234,7 @@ const Board = () => {
           <>
             <b className="mt-4 mb-3">
               <p>
-                <span class="black">Black</span> is the winner!
+               <h2><span class="black">Black</span> is the winner!</h2> 
               </p>
             </b>
             <button class="btndd" onClick={() => handleRestart()}>
