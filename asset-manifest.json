@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/Gomoku/static/css/main.211721da.css",
+    "main.js": "/Gomoku/static/js/main.f4c55bbe.js",
+    "static/media/gom4.jpeg": "/Gomoku/static/media/gom4.724df07d15e53f219be6.jpeg",
+    "index.html": "/Gomoku/index.html",
+    "main.211721da.css.map": "/Gomoku/static/css/main.211721da.css.map",
+    "main.f4c55bbe.js.map": "/Gomoku/static/js/main.f4c55bbe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.211721da.css",
+    "static/js/main.f4c55bbe.js"
+  ]
+}
