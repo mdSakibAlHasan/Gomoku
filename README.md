@@ -1,5 +1,6 @@
 # Gomoku a 10*10 size board game.( Five in a row)
-
+This is a human vs AI game.
+Both player are try to make 5 same stone in row or column or diagonal. If it make 5 same stone then it wins the game. Beside wining the game it also need to defence oponent player 5 same stone make.
 
 
 # Getting Started with Create React App
